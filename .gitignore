@@ -3,3 +3,10 @@
 
 # python __pycache__ folder
 __pycache__
+
+# don't commit our secrets
+secrets.json
+
+# don't commit our images
+images/*
+!images/.gitkeep
