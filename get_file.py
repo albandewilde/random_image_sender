@@ -1,4 +1,4 @@
-#/usr/bin/env python3
+#!/usr/bin/env python3
 
 import os
 from random import randrange
@@ -11,5 +11,5 @@ def rdm(folder_path):
     return file_name
 
 
-if True:#"__name__" in __main__:
+if __name__ in "__main__":
     print(rdm(input("Folder: ")))
