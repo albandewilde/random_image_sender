@@ -23,6 +23,6 @@ To get your own bot, follow these steps:
 
 - copy the `secrets.json.tpl` file to `secrets.json`
 - edit the `secrets.json` file
-- replace the `<your_discord_token>` by your discord token
+- replace `<your_discord_token>` by your discord token
 - save the file and quit
 - start the bot with the command `python3 discord_client.py`
