@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python3.7
 
 import json
 from datetime import datetime
@@ -22,7 +22,7 @@ COLORS = {
 
 def log(context):
     pseudo = COLORS["RED"] + context.message.author.name + COLORS["NEUTRAL"]
-    server = COLORS["GREEN"] + context.message.server.name + COLORS["NEUTRAL"]
+    server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
     channel = COLORS["CYAN"] + context.message.channel.name + COLORS["NEUTRAL"]
     date = "{}/{}/{} {}:{}:{}".format(
         datetime.now().year,
