@@ -20,6 +20,26 @@ COLORS = {
     "NEUTRAL": "\033[00m"
 }
 
+SIGN = (
+    COLORS["RED"] + "/" +
+    COLORS["YELLOW"] + "!" +
+    COLORS["RED"] + "\\" +
+    COLORS["NEUTRAL"] +
+    " "
+)
+
+def DISPLAY_ERROR(error_msg):
+    print(
+        "\n" +
+        SIGN +
+        " " +
+        COLORS["RED"] +
+        error_msg +
+        COLORS["NEUTRAL"] +
+        "\n"
+    )
+
+
 def log(context):
     pseudo = COLORS["RED"] + context.message.author.name + COLORS["NEUTRAL"]
     server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
@@ -59,7 +79,14 @@ bot = discord.ext.commands.Bot(
 async def random_image(context):
     log(context)
     if context.message.channel.is_nsfw():
-        msg_content = {"file": discord.File("images/{}".format(rdm("images/")))}
+        try:
+            msg_content = {"file": discord.File("images/{}".format(rdm("images/")))}
+        except FileNotFoundError:
+            DISPLAY_ERROR("The folder `images` was not found")
+            msg_content = {"content": "The folder with images is missing, sorry..."}
+        except ValueError:
+            DISPLAY_ERROR("The folder `images` is empty")
+            msg_content = {"content": "The folder with images is totaly empty"}
     else:
         msg_content = {"content": "Sorry, this channel isn't a NSFW channel"}
 
