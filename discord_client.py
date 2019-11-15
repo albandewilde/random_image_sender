@@ -24,7 +24,7 @@ def log(context):
     pseudo = COLORS["RED"] + context.message.author.name + COLORS["NEUTRAL"]
     server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
     channel = COLORS["CYAN"] + context.message.channel.name + COLORS["NEUTRAL"]
-    date = "{}/{}/{} {}:{}:{}".format(
+    date = "{:04}/{:02}/{:02} {:02}:{:02}:{:02}".format(
         datetime.now().year,
         datetime.now().month,
         datetime.now().day,
@@ -58,7 +58,12 @@ bot = discord.ext.commands.Bot(
 )
 async def random_image(context):
     log(context)
-    await context.send(file=discord.File("images/{}".format(rdm("images/"))))
+    if context.message.channel.is_nsfw():
+        msg_content = {"file": discord.File("images/{}".format(rdm("images/")))}
+    else:
+        msg_content = {"content": "Sorry, this channel isn't a NSFW channel"}
+
+    await context.send(**msg_content)
 
 
 @bot.event
