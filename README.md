@@ -19,7 +19,7 @@ To get your own bot, follow these steps:
 - put all your images that can be send in the `images/` folder.
 - follow steps for the service you want (see below)
 
-### Discrod bot
+### Discord bot
 
 - copy the `secrets.json.tpl` file to `secrets.json`
 - edit the `secrets.json` file
