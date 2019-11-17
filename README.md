@@ -9,7 +9,7 @@ The bot can be use for many services.
 - [ ] e-mail
 - [ ] Twitter
 - [ ] Messenger
-- [ ] Web site
+- [x] Web site
 - [ ] ...
 
 ## Get our own bot
