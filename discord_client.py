@@ -73,7 +73,6 @@ bot = discord.ext.commands.Bot(
 
 @bot.command(
     name="img",
-    pass_context=True,
     description="Send an image"
 )
 async def random_image(context):
