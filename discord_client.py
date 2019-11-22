@@ -41,9 +41,8 @@ def DISPLAY_ERROR(error_msg):
 
 
 def log(context):
+    channel_type = str(context.message.channel.type)
     pseudo = COLORS["RED"] + context.message.author.name + COLORS["NEUTRAL"]
-    server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
-    channel = COLORS["CYAN"] + context.message.channel.name + COLORS["NEUTRAL"]
     date = "{:04}/{:02}/{:02} {:02}:{:02}:{:02}".format(
         datetime.now().year,
         datetime.now().month,
@@ -54,12 +53,28 @@ def log(context):
     )
     date = COLORS["PURPLE"] + date + COLORS["NEUTRAL"]
 
-    print("{psd} ask for an image on the server {srv} in {chan} at {date}".format(
+    if channel_type in ["text"]:
+        server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
+        channel = COLORS["CYAN"] + context.message.channel.name + COLORS["NEUTRAL"]
+        where = "on the server {srv} in {chan}".format(
+            srv=server,
+            chan=channel
+        )
+    elif channel_type in ["private"]:
+        where = "in " + COLORS["GREEN"] + "direct message" + COLORS["NEUTRAL"]
+    else:    # channel_type in ["voice", "group", "news", "store"]
+        print(
+            COLORS["RED"] +
+            "This isn't a channel we can send images"+
+            COLORS["NEUTRAL"]
+        )
+
+    print("{psd} ask for an image {where} at {date}".format(
         psd=pseudo,
-        srv=server,
-        chan=channel,
+        where=where,
         date=date
     ))
+
 
 
 # read our discord acces token
@@ -77,7 +92,10 @@ bot = discord.ext.commands.Bot(
 )
 async def random_image(context):
     log(context)
-    if context.message.channel.is_nsfw():
+    if (
+        str(context.message.channel.type) == "private" or
+        context.message.channel.is_nsfw()
+    ):
         try:
             msg_content = {"file": discord.File("images/{}".format(rdm("images/")))}
         except FileNotFoundError:
