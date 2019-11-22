@@ -35,6 +35,7 @@ SIGN = (
     " "
 )
 
+
 def DISPLAY_ERROR(error_msg):
     print(
         "\n" +
@@ -61,8 +62,16 @@ def log(context):
     date = COLORS["PURPLE"] + date + COLORS["NEUTRAL"]
 
     if channel_type in ["text"]:
-        server = COLORS["GREEN"] + context.message.channel.guild.name + COLORS["NEUTRAL"]
-        channel = COLORS["CYAN"] + context.message.channel.name + COLORS["NEUTRAL"]
+        server = (
+            COLORS["GREEN"] +
+            context.message.channel.guild.name +
+            COLORS["NEUTRAL"]
+        )
+        channel = (
+            COLORS["CYAN"] +
+            context.message.channel.name +
+            COLORS["NEUTRAL"]
+        )
         where = "on the server {srv} in {chan}".format(
             srv=server,
             chan=channel
@@ -72,7 +81,7 @@ def log(context):
     else:    # channel_type in ["voice", "group", "news", "store"]
         print(
             COLORS["RED"] +
-            "This isn't a channel we can send images"+
+            "This isn't a channel we can send images" +
             COLORS["NEUTRAL"]
         )
 
@@ -83,7 +92,6 @@ def log(context):
     ))
 
 
-
 # read our discord acces token
 with open("secrets.json", "r") as secrets:
     DISCORD_TOKEN = json.load(secrets)["discord"]
@@ -92,6 +100,7 @@ bot = discord.ext.commands.Bot(
     command_prefix="¤",
     description="Send a random image"
 )
+
 
 @bot.command(
     name="img",
@@ -104,12 +113,16 @@ async def random_image(context):
         context.message.channel.is_nsfw()
     ):
         try:
-            msg_content = {"file":
-                discord.File(IMG_FOLDER + "/{}".format(rdm(IMG_FOLDER)))
+            msg_content = {
+                "file": discord.File(
+                    IMG_FOLDER + "/{}".format(rdm(IMG_FOLDER))
+                )
             }
         except FileNotFoundError:
             DISPLAY_ERROR("The folder `images` was not found")
-            msg_content = {"content": "The folder with images is missing, sorry..."}
+            msg_content = {
+                "content": "The folder with images is missing, sorry..."
+            }
         except ValueError:
             DISPLAY_ERROR("The folder `images` is empty")
             msg_content = {"content": "The folder with images is totaly empty"}
