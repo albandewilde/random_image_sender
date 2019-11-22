@@ -7,6 +7,13 @@ import discord.ext.commands
 
 from get_file import rdm
 
+# read our environement variables
+with open("env.json", "r") as env:
+    ENV = json.load(env)
+
+# set our environement variables
+IMG_FOLDER = ENV["images_folder"]
+
 COLORS = {
     "BLACK": "\033[30m",
     "RED": "\033[31m",
@@ -97,7 +104,9 @@ async def random_image(context):
         context.message.channel.is_nsfw()
     ):
         try:
-            msg_content = {"file": discord.File("images/{}".format(rdm("images/")))}
+            msg_content = {"file":
+                discord.File(IMG_FOLDER + "/{}".format(rdm(IMG_FOLDER)))
+            }
         except FileNotFoundError:
             DISPLAY_ERROR("The folder `images` was not found")
             msg_content = {"content": "The folder with images is missing, sorry..."}
