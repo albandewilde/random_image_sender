@@ -49,10 +49,14 @@ def DISPLAY_ERROR(error_msg):
 
 
 def log(context):
-    channel_type = str(context.message.channel.type)
-    name = context.message.author.name
-    discriminator = context.message.author.discriminator
-    nickname = context.message.author.display_name
+    channel = context.message.channel
+    author = context.message.author
+
+    channel_type = str(channel.type)
+    name = author.name
+    discriminator = author.discriminator
+    nickname = author.display_name
+
     pseudo = (
         COLORS["RED"] +
         name + "#" + discriminator +
@@ -75,14 +79,16 @@ def log(context):
     date = COLORS["PURPLE"] + date + COLORS["NEUTRAL"]
 
     if channel_type in ["text"]:
+        guild = channel.guild
+
         server = (
             COLORS["GREEN"] +
-            context.message.channel.guild.name +
+            guild.name +
             COLORS["NEUTRAL"]
         )
         channel = (
             COLORS["CYAN"] +
-            context.message.channel.name +
+            channel.name +
             COLORS["NEUTRAL"]
         )
         where = "on the server {srv} in {chan}".format(
