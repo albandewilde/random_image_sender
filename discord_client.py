@@ -50,7 +50,20 @@ def DISPLAY_ERROR(error_msg):
 
 def log(context):
     channel_type = str(context.message.channel.type)
-    pseudo = COLORS["RED"] + context.message.author.name + COLORS["NEUTRAL"]
+    name = context.message.author.name
+    discriminator = context.message.author.discriminator
+    nickname = context.message.author.display_name
+    pseudo = (
+        COLORS["RED"] +
+        name + "#" + discriminator +
+        COLORS["NEUTRAL"] +
+        " (aka. " +
+        COLORS["BLUE"] +
+        nickname +
+        COLORS["NEUTRAL"] +
+        ")"
+    )
+
     date = "{:04}/{:02}/{:02} {:02}:{:02}:{:02}".format(
         datetime.now().year,
         datetime.now().month,
