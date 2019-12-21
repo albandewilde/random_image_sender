@@ -10,6 +10,7 @@ The bot can be use for many services.
 - [ ] Twitter
 - [ ] Messenger
 - [x] Web site
+- [ ] Irc
 - [ ] ...
 
 ## Get our own bot
