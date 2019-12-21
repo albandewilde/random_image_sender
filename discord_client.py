@@ -138,7 +138,7 @@ async def random_image(context):
                 )
             }
         except FileNotFoundError:
-            DISPLAY_ERROR("The folder `images` was not found")
+            DISPLAY_ERROR("The folder `{}` was not found".format(IMG_FOLDER))
             msg_content = {
                 "content": "The folder with images is missing, sorry..."
             }
