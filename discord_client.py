@@ -143,7 +143,7 @@ async def random_image(context):
                 "content": "The folder with images is missing, sorry..."
             }
         except ValueError:
-            DISPLAY_ERROR("The folder `images` is empty")
+            DISPLAY_ERROR("The folder `{}` is empty".format(IMG_FOLDER))
             msg_content = {"content": "The folder with images is totaly empty"}
     else:
         msg_content = {"content": "Sorry, this channel isn't a NSFW channel"}
