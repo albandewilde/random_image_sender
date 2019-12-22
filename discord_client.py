@@ -148,7 +148,12 @@ async def random_image(context):
     else:
         msg_content = {"content": "Sorry, this channel isn't a NSFW channel"}
 
-    await context.send(**msg_content)
+    try:
+        await context.send(**msg_content)
+    except:
+        DISPLAY_ERROR("Somethings went wrong")
+        msg_content = {"content": "Somethings went wrons, sorry.\n┬─┬ ︵ /(.□. \）"}
+        await context.send(**msg_content)
 
 
 @bot.event
