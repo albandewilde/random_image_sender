@@ -13,6 +13,18 @@ The bot can be use for many services.
 - [ ] Irc
 - [ ] ...
 
+## Running services
+
+### Discord
+
+If you want that bot on your server, it is available on the [Discord Bot List](https://top.gg/ "DBL") at [this page](https://top.gg/bot/639976883148292136 "RIS").  
+Otherwise you can invite him with [that link](https://discordapp.com/api/oauth2/authorize?client_id=639976883148292136&scope=bot&permissions=0 "invite RIS").
+
+### Web site
+
+The web site isn't hosted for now, if you want to host it for me be pleased to
+contact me.
+
 ## Get our own bot
 
 To get your own bot, follow these steps:
