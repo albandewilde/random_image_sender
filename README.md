@@ -6,7 +6,7 @@ However, you can use the already existing services.
 
 The bot can be use for many services.
 - [x] Discord
-- [ ] e-mail
+- [x] e-mail
 - [ ] Twitter
 - [ ] Messenger
 - [x] Web site
@@ -30,6 +30,18 @@ To get your own bot, follow these steps:
 - replace `<your_discord_token>` by your discord token
 - save the file and quit
 - start the bot with the command `python3 discord_client.py`
+
+### e-mail
+
+- edit the `env.json` file
+- in the `email` section, replace:
+    - `<your_smtp_server_address>` by the address of your smtp server.
+    - `<port_of_smtp_server>` by the port of your smtp server.
+    - `<sender_email_address>` by the e-mail address of your sender client
+    - `<password_of_email_client>` by the password of the client
+- save the file and quit
+- start the server with the commant `python3 email_client.py`
+
 
 ### Web site
 
