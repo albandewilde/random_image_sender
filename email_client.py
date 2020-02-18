@@ -115,5 +115,9 @@ def reply(server, port, user, password):
 
 
 if __name__ in "__main__":
+    # That is the worst code i've ever wrote
     while True:
-        reply(SERVER, SERVER_PORT, USER, PASSWORD)
+        try:
+            reply(SERVER, SERVER_PORT, USER, PASSWORD)
+        except:
+            continue
