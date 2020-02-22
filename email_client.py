@@ -7,6 +7,7 @@ from email.message import EmailMessage
 from email import message_from_bytes
 import imghdr
 from datetime import datetime
+from time import sleep
 
 from get_file import rdm
 
@@ -119,5 +120,7 @@ if __name__ in "__main__":
     while True:
         try:
             reply(SERVER, SERVER_PORT, USER, PASSWORD)
-        except:
-            continue
+        except Exception as err:
+            print(err)
+            print("An error occured, now waiting 60 secondes")
+            sleep(60)
