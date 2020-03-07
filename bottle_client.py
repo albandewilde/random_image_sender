@@ -22,7 +22,7 @@ PORT = ENV["bottle"]["port"]
 def img():
     try:
         pics = rdm(IMG_FOLDER)
-        content = "<img src='image/{image}'>".format(image=pics)
+        content = "<img src='image/{image}' style='max-width: 100vw; max-height: 100vh;'>".format(image=pics)
     except FileNotFoundError:
         content = "Sorry, the folder with the images is not present"
     except ValueError:
