@@ -1,6 +1,8 @@
 # RIS (Random Image Sender)
 Choose a random image in a folder and send it.
 
+Images can be **NSFW** content, be carefull.
+
 You can get you own bot for differents reasons. For exemple, if you want to have your own image folder.
 However, you can use the already existing services.
 
