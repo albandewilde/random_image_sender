@@ -1,7 +1,6 @@
 # RIS (Random Image Sender)
-Choose a random image in a folder and send it.
 
-Images can be **NSFW** content, be carefull.
+Choose a random image in a folder and send it.
 
 You can get you own bot for differents reasons. For exemple, if you want to have your own image folder.
 However, you can use the already existing services.
@@ -14,24 +13,6 @@ The bot can be use for many services.
 - [x] Web site
 - [ ] Irc
 - [ ] ...
-
-## Running services
-
-### Discord
-
-If you want that bot on your server, it is available on the [Discord Bot List](https://top.gg/ "DBL") at [this page](https://top.gg/bot/639976883148292136 "RIS").  
-Otherwise you can invite him with [that link](https://discordapp.com/api/oauth2/authorize?client_id=639976883148292136&scope=bot&permissions=0 "invite RIS").
-
-### e-mail
-
-You just have to send an e-mail to the RIS at the address [random.image.sender@gmail.com](mailto:random.image.sender@gmail.com "The RIS e-mail").  
-There is no need to specify the e-mail subject or content. Just send an e-mail
-at this address ans it will answer you with an image.
-
-### Web site
-
-The web site isn't hosted for now, if you want to host it for me be pleased to
-contact me.
 
 ## Get our own bot
 
