@@ -8,7 +8,8 @@ def rdm(folder_path):
     """Return a random file name in the given folder"""
     path = os.path.abspath(folder_path)
     files = os.listdir(path)
-    files.remove(".gitkeep")    # remove this file to get only images
+    if ".gitkeep" in files:
+        files.remove(".gitkeep")    # remove this file to get only images
     file_name = files[randrange(len(files))]
     return file_name
 
