@@ -6,16 +6,20 @@ from discord.ext import commands
 import discord
 from get_file import rdm
 
-# read our environement variables
+# read our environment variables
 with open("env.json", "r") as env:
     ENV = json.load(env)
 
-# set our environement variables
-IMG_CRITICAL = ENV["images_critical"]
-IMG_FAIL = ENV["images_fail"]
+# set our environment variables
+FOLDER_CRITICAL = ENV["folder_critical"]
+FOLDER_CRITICAL_HELPER = ENV["folder_critical_helper"]
+FOLDER_FAIL = ENV["folder_fail"]
+FOLDER_FAIL_HELPER = ENV["folder_fail_helper"]
 
-FAIL_COMMAND = ENV["fail_command"]
-CRITICAL_COMMAND = ENV["critical_command"]
+COMMAND_FAIL = ENV["command_fail"]
+COMMAND_CRITICAL = ENV["command_critical"]
+COMMAND_FAIL_HELPER = ENV["command_fail_helper"]
+COMMAND_CRITICAL_HELPER = ENV["command_critical_helper"]
 
 COLORS = {
     "BLACK": "\033[30m",
@@ -124,25 +128,56 @@ bot = commands.Bot(
 )
 
 
+# CRITICAL COMMANDS ================
 @bot.command(
-    name=CRITICAL_COMMAND,
+    name=COMMAND_CRITICAL,
     description="Send an critical card! Good shit"
 )
 async def random_critical_image(context):
+    await send_img(FOLDER_CRITICAL, context)
+
+
+@bot.command(
+    name=COMMAND_CRITICAL_HELPER,
+    description="Send an help for critical command!"
+)
+async def critical_help_image(context):
+    await send_img(FOLDER_CRITICAL_HELPER, context)
+
+
+# FAIL COMMANDS =====================
+@bot.command(
+    name=COMMAND_FAIL,
+    description="Send an fail card! Oh no..."
+)
+async def random_fail_image(context):
+    await send_img(FOLDER_FAIL, context)    
+
+
+@bot.command(
+    name=COMMAND_FAIL_HELPER,
+    description="Send an help for critical command!"
+)
+async def critical_help_image(context):
+    await send_img(FOLDER_FAIL_HELPER, context)
+
+
+
+async def send_img(folder, context):
     log(context)
     try:
         msg_content = {
             "file": discord.File(
-                IMG_CRITICAL + "/{}".format(rdm(IMG_CRITICAL))
+                folder + "/{}".format(rdm(folder))
             )
         }
     except FileNotFoundError:
-        DISPLAY_ERROR("The folder `{}` was not found".format(IMG_CRITICAL))
+        DISPLAY_ERROR("The folder `{}` was not found".format(folder))
         msg_content = {
             "content": "The folder with images is missing, sorry..."
         }
     except ValueError:
-        DISPLAY_ERROR("The folder `{}` is empty".format(IMG_CRITICAL))
+        DISPLAY_ERROR("The folder `{}` is empty".format(folder))
         msg_content = {"content": "The folder with images is totaly empty"}
 
     try:
@@ -152,33 +187,6 @@ async def random_critical_image(context):
         msg_content = {"content": "Somethings went wrongs, sorry.\n┬─┬ ︵ /(.□. \）"}
         await context.send(**msg_content)
 
-@bot.command(
-    name=FAIL_COMMAND,
-    description="Send an fail card! Oh no..."
-)
-async def random_fail_image(context):
-    log(context)
-    try:
-        msg_content = {
-            "file": discord.File(
-                IMG_FAIL + "/{}".format(rdm(IMG_FAIL))
-            )
-        }
-    except FileNotFoundError:
-        DISPLAY_ERROR("The folder `{}` was not found".format(IMG_FAIL))
-        msg_content = {
-            "content": "The folder with images is missing, sorry..."
-        }
-    except ValueError:
-        DISPLAY_ERROR("The folder `{}` is empty".format(IMG_FAIL))
-        msg_content = {"content": "The folder with images is totaly empty"}
-
-    try:
-        await context.send(**msg_content)
-    except:
-        DISPLAY_ERROR("Somethings went wrong")
-        msg_content = {"content": "Somethings went wrons, sorry.\n┬─┬ ︵ /(.□. \）"}
-        await context.send(**msg_content)
 
 
 @bot.command()

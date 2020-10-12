@@ -11,7 +11,13 @@ secrets.json
 env.json
 
 # don't commit our images
-images/*
-!images/.gitkeep
+images_critical/*
+!images_critical/.gitkeep
+images_critical_helper/*
+!images_critical_helper/.gitkeep
+
 images_fail/*
 !images_fail/.gitkeep
+images_fail_helper/*
+!images_fail_helper/.gitkeep
+
