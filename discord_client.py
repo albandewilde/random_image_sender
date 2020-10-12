@@ -2,9 +2,8 @@
 
 import json
 from datetime import datetime
-
-import discord.ext.commands
-
+from discord.ext import commands
+import discord
 from get_file import rdm
 
 # read our environement variables
@@ -12,7 +11,11 @@ with open("env.json", "r") as env:
     ENV = json.load(env)
 
 # set our environement variables
-IMG_FOLDER = ENV["images_folder"]
+IMG_CRITICAL = ENV["images_critical"]
+IMG_FAIL = ENV["images_fail"]
+
+FAIL_COMMAND = ENV["fail_command"]
+CRITICAL_COMMAND = ENV["critical_command"]
 
 COLORS = {
     "BLACK": "\033[30m",
@@ -97,7 +100,7 @@ def log(context):
         )
     elif channel_type in ["private"]:
         where = "in " + COLORS["GREEN"] + "direct message" + COLORS["NEUTRAL"]
-    else:    # channel_type in ["voice", "group", "news", "store"]
+    else:    
         print(
             COLORS["RED"] +
             "This isn't a channel we can send images" +
@@ -115,38 +118,60 @@ def log(context):
 with open("secrets.json", "r") as secrets:
     DISCORD_TOKEN = json.load(secrets)["discord"]
 
-bot = discord.ext.commands.Bot(
-    command_prefix="¤",
+bot = commands.Bot(
+    command_prefix="*",
     description="Send a random image"
 )
 
 
 @bot.command(
-    name="img",
-    description="Send an image"
+    name=CRITICAL_COMMAND,
+    description="Send an critical card! Good shit"
 )
-async def random_image(context):
+async def random_critical_image(context):
     log(context)
-    if (
-        str(context.message.channel.type) == "private" or
-        context.message.channel.is_nsfw()
-    ):
-        try:
-            msg_content = {
-                "file": discord.File(
-                    IMG_FOLDER + "/{}".format(rdm(IMG_FOLDER))
-                )
-            }
-        except FileNotFoundError:
-            DISPLAY_ERROR("The folder `{}` was not found".format(IMG_FOLDER))
-            msg_content = {
-                "content": "The folder with images is missing, sorry..."
-            }
-        except ValueError:
-            DISPLAY_ERROR("The folder `{}` is empty".format(IMG_FOLDER))
-            msg_content = {"content": "The folder with images is totaly empty"}
-    else:
-        msg_content = {"content": "Sorry, this channel isn't a NSFW channel"}
+    try:
+        msg_content = {
+            "file": discord.File(
+                IMG_CRITICAL + "/{}".format(rdm(IMG_CRITICAL))
+            )
+        }
+    except FileNotFoundError:
+        DISPLAY_ERROR("The folder `{}` was not found".format(IMG_CRITICAL))
+        msg_content = {
+            "content": "The folder with images is missing, sorry..."
+        }
+    except ValueError:
+        DISPLAY_ERROR("The folder `{}` is empty".format(IMG_CRITICAL))
+        msg_content = {"content": "The folder with images is totaly empty"}
+
+    try:
+        await context.send(**msg_content)
+    except:
+        DISPLAY_ERROR("Somethings went wrong")
+        msg_content = {"content": "Somethings went wrongs, sorry.\n┬─┬ ︵ /(.□. \）"}
+        await context.send(**msg_content)
+
+@bot.command(
+    name=FAIL_COMMAND,
+    description="Send an fail card! Oh no..."
+)
+async def random_fail_image(context):
+    log(context)
+    try:
+        msg_content = {
+            "file": discord.File(
+                IMG_FAIL + "/{}".format(rdm(IMG_FAIL))
+            )
+        }
+    except FileNotFoundError:
+        DISPLAY_ERROR("The folder `{}` was not found".format(IMG_FAIL))
+        msg_content = {
+            "content": "The folder with images is missing, sorry..."
+        }
+    except ValueError:
+        DISPLAY_ERROR("The folder `{}` is empty".format(IMG_FAIL))
+        msg_content = {"content": "The folder with images is totaly empty"}
 
     try:
         await context.send(**msg_content)
@@ -154,6 +179,11 @@ async def random_image(context):
         DISPLAY_ERROR("Somethings went wrong")
         msg_content = {"content": "Somethings went wrons, sorry.\n┬─┬ ︵ /(.□. \）"}
         await context.send(**msg_content)
+
+
+@bot.command()
+async def test(ctx, arg):
+    await ctx.send(arg)
 
 
 @bot.event

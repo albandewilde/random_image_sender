@@ -13,3 +13,5 @@ env.json
 # don't commit our images
 images/*
 !images/.gitkeep
+images_fail/*
+!images_fail/.gitkeep
