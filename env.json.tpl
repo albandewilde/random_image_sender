@@ -1,4 +1,6 @@
 {
+    "command_char": "*", 
+
     "folder_critical": "./images_critical/",
     "folder_critical_helper": "./images_critical_helper/",
     "folder_fail": "./images_fail/",

@@ -21,6 +21,9 @@ COMMAND_CRITICAL = ENV["command_critical"]
 COMMAND_FAIL_HELPER = ENV["command_fail_helper"]
 COMMAND_CRITICAL_HELPER = ENV["command_critical_helper"]
 
+COMMAND_CHAR = ENV['command_char']  # Command used to activate bot on discord
+
+
 COLORS = {
     "BLACK": "\033[30m",
     "RED": "\033[31m",
@@ -123,7 +126,7 @@ with open("secrets.json", "r") as secrets:
     DISCORD_TOKEN = json.load(secrets)["discord"]
 
 bot = commands.Bot(
-    command_prefix="*",
+    command_prefix=COMMAND_CHAR,
     description="Send a random image"
 )
 
