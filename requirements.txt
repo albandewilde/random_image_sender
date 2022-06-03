@@ -1,2 +1,2 @@
 discord.py==1.4.0
-bottle==0.12.19
+bottle==0.12.20
